@@ -2,6 +2,11 @@ package Calculator;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("holoo");
+       CalculatorModel model = new CalculatorModel();
+       CalculatorView view = new CalculatorView();
+       CalculatorController controller = new CalculatorController(view, model);
+
     }
 }
+
+
