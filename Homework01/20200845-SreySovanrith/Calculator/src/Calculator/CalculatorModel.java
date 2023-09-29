@@ -1,70 +1,42 @@
 package Calculator;
 
 public class CalculatorModel {
-    private double memoryValue;
-    private double currentValue;
+    private double firstNumber;
+    private double secondNumber;
     private String operator;
 
-    public CalculatorModel(){
-        memoryValue = 0;
-        currentValue = 0;
-        operator = "";
-    }
-    public void clear(){
-        currentValue = 0;
-        operator = "";
-    }
-    public void addToMemory(double value){
-        memoryValue += value;
-    }
-    public void subtractFromMemory(double value){
-        memoryValue -= value;
+    public void setFirstNumber(double firstNumber) {
+        this.firstNumber = firstNumber;
     }
 
-    public void clearMemory(){
-        memoryValue = 0;
+    public void setSecondNumber(double secondNumber) {
+        this.secondNumber = secondNumber;
     }
-    public double getMemoryValue(){
-        return memoryValue;
-    }
-    public double getCurrentValue() {
-        return currentValue;
-    }
+
     public void setOperator(String operator) {
         this.operator = operator;
-//        currentValue = Double.parseDouble(operator);
-    }
-    public void appendDigit(String digit) {
-        if(operator.equals("0")) {
-            operator = digit;
-        } else {
-            operator += digit;
-        }
-        currentValue = Double.parseDouble(operator);
-    }
-    public double calculateResult () {
-        double result = currentValue;
-        switch (operator) {
-            case "+" :
-                result += currentValue;
-                break;
-            case "-" :
-                result -=currentValue;
-                break;
-            case "*" :
-                result *= currentValue;
-                break;
-            case "/" :
-                if (currentValue != 0) {
-                    result /= currentValue;
-                }
-                break;
-        }
-        currentValue = result;
-        operator = "";
-        return result;
     }
 
+    public double calculate() {
+        double result = 0;
+        switch (operator) {
+            case "+" :
+                result = firstNumber + secondNumber;
+                break;
+            case "-" :
+                result = firstNumber - secondNumber;
+                break;
+            case "*" :
+                result = firstNumber * secondNumber;
+                break;
+            case "/" :
+                if (secondNumber != 0) {
+                    result = firstNumber / secondNumber;
+                    break;
+                } else throw new ArithmeticException("Error");
+        }
+        return result;
+    }
 }
 
 
