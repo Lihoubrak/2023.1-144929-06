@@ -4,65 +4,54 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-
-public class CalculatorView extends JFrame {
-    private JTextField displayField;
+public class CalculatorView {
+    private JFrame frame;
+    private JTextField textField;
     private JButton[] numberButtons;
     private JButton[] operatorButtons;
-    private JButton clearButton;
     private JButton equalButton;
-    private JButton memoryAddButton;
-    private JButton memorySubButton;
-    private JButton memoryClearButton;
+    private JButton clearButton;
 
     public CalculatorView(){
-        setTitle("Calculator");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        createUserInterface();
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-    private void createUserInterface(){
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        displayField = new JTextField();
-        displayField.setPreferredSize(new Dimension(250,30));
-        displayField.setEditable(false);
-        mainPanel.add(displayField, BorderLayout.NORTH);
+        frame = new JFrame("Simple Calculator Using Java Swing");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(300, 350));
+        frame.setLayout(new BorderLayout());
+        textField = new JTextField();
+        frame.add(textField, BorderLayout.NORTH);
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5,4,5,5));
+        buttonPanel.setLayout(new GridLayout(4,5,5,5));
         numberButtons = new JButton[10];
+
+        // display number button by using loop
+
         for (int i = 0; i < 10; i++) {
             numberButtons[i] = new JButton(String.valueOf(i));
             buttonPanel.add(numberButtons[i]);
         }
+
+        // display operator
         operatorButtons = new JButton[4];
         operatorButtons[0] = new JButton("+");
         operatorButtons[1] = new JButton("-");
         operatorButtons[2] = new JButton("*");
         operatorButtons[3] = new JButton("/");
-        for (int i = 0; i < 4; i++) {
-            buttonPanel.add(operatorButtons[i]);
+        for (JButton button : operatorButtons) {
+            buttonPanel.add(button);
         }
-
-        clearButton = new JButton("C");
+        // display = button
         equalButton = new JButton("=");
-        memoryAddButton = new JButton("M+");
-        memorySubButton = new JButton("M-");
-        memoryClearButton = new JButton("MC");
-        buttonPanel.add(clearButton);
         buttonPanel.add(equalButton);
-        buttonPanel.add(memoryAddButton);
-        buttonPanel.add(memorySubButton);
-        buttonPanel.add(memoryClearButton);
+        frame.add(buttonPanel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
 
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
-        add(mainPanel);
-    }
-    public void setDisplayValue(double value) {
-        displayField.setText(String.valueOf(value));
+        // display clear button
+        clearButton = new JButton("C");
+        buttonPanel.add(clearButton);
+        frame.add(buttonPanel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
     public void addNumberButtonListener(ActionListener listener) {
         for (JButton button : numberButtons) {
@@ -74,20 +63,22 @@ public class CalculatorView extends JFrame {
             button.addActionListener(listener);
         }
     }
-    public void addClearButtonListener(ActionListener listener) {
-        clearButton.addActionListener(listener);
-    }
     public void addEqualButtonListener(ActionListener listener) {
         equalButton.addActionListener(listener);
     }
-    public void addMemoryAddButtonListener(ActionListener listener) {
-        memoryAddButton.addActionListener(listener);
+    public void addClearButtonListener(ActionListener listener) {
+        clearButton.addActionListener(listener);
     }
-    public void addMemorySubButtonListener(ActionListener listener) {
-        memorySubButton.addActionListener(listener);
+    public String getInput(){
+        return textField.getText();
     }
-    public void addMemoryClearButtonListener(ActionListener listener) {
-        memoryClearButton.addActionListener(listener);
+
+    public void setInput(String input){
+        textField.setText(input);
+    }
+
+    public void setResult(String result) {
+        textField.setText(result);
     }
 }
 
