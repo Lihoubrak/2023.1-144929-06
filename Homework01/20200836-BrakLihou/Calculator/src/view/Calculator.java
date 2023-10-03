@@ -17,8 +17,8 @@ public class Calculator {
     public Calculator() {
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 400);
-
+        frame.setSize(400, 500);
+        frame.setResizable(false);
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputField = new JTextField(15);
         inputField.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -44,7 +44,12 @@ public class Calculator {
             button.setFont(new Font("Arial", Font.PLAIN, 24));
             buttonPanel.add(button);
         }
-
+        addButton.setBackground(Color.BLUE);
+        subtractButton.setBackground(Color.BLUE);
+        multiplyButton.setBackground(Color.BLUE);
+        divideButton.setBackground(Color.BLUE);
+        clearButton.setBackground(Color.RED);
+        equalsButton.setBackground(Color.GREEN);
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(inputPanel, BorderLayout.NORTH);
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
